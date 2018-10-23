@@ -1,0 +1,99 @@
+/* font */
+body {
+  font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic'
+}
+@media screen and (max-width: 480px) {
+
+}
+
+#post-main {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+#go-twitter-button {
+  background: content-box;
+  height: 50px;
+  font-size: 1.0rem;
+  width: 60%;
+  border-radius: 30px;
+  align-self: center;
+  margin: 8px;
+}
+
+#post-page {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 8px;
+}
+
+#post-message {
+  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      padding: 8px 1em;
+      font-size: 14px;
+      line-height: 24px;
+      color: #fff;
+      vertical-align: top;
+      border: 1px solid transparent;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      color: #202020;
+      background-color: #fff;
+      border-color: #3a3a3a;
+      border-radius: 4px;
+  min-height: 140px;
+  max-width: 350px;
+}
+
+#home-footer {
+  padding-top: 32px;
+  font-size: 0.8rem;
+  color: #f3f3f3;
+  text-align: center;
+}
+
+#home-copy {
+  font-size: 0.8rem;
+  text-align: center;
+  padding-top: 16px;
+}
+
+#post-date {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 8px;
+}
+.date-item {
+  background: #f3f3f3;
+  height: 36px;
+  font-size: 1.0rem;
+  width: 80px;
+  border-radius: 30px;
+  text-align: center;
+  margin-left: 8px;
+  color: #AAAAAA;
+  line-height: 34px;
+}
+.date-item.active{
+  color: #fff;
+  background-color: #ff8d00;
+}
+
+.column {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 8px;
+}
