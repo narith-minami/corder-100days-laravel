@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use Abraham\TwitterOAuth\TwitterOAuth; 
+use Abraham\TwitterOAuth\TwitterOAuth;
+use Illuminate\Http\Request;
 
 class TwitterService
 {
@@ -83,13 +84,13 @@ class TwitterService
      return $url;
   }
 
-  public function verify() {
+  public function verify(Request $request) {
     $oauth_token = session('requestToken');
     $oauth_token_secret = session('requestTokenSecret');
 
     # request_tokenが不正な値だった場合エラー
     if ($request->has('oauth_token') && $oauth_token !== $request->oauth_token) {
-        return Redirect::to('/login');
+        return false;
     }
     $twitter = new TwitterOAuth($oauth_token,$oauth_token_secret);
 
