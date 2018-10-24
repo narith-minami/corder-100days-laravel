@@ -28,6 +28,7 @@
 
 <div id="user-view"></div>
 
+<p>{{ $tweets }}</p>
 <div id="list-items">
 <ul class="cbp_tmtimeline">
 @forelse ($tweets as $tweet)
