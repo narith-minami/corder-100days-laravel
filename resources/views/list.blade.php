@@ -28,10 +28,9 @@
 
 <div id="user-view"></div>
 
-<p>{{ $tweets }}</p>
 <div id="list-items">
 <ul class="cbp_tmtimeline">
-{{-- @forelse ($tweets as $tweet)
+@forelse ($tweets as $tweet)
 <li>
   <time class="cbp_tmtime" datetime="{{ $tweet->sCreatedAt }}"><span>{{ $tweet->sCreatedYMD }}</span> <span>{{ $tweet->sCreatedHI }}</span></time>
   <div class="cbp_tmicon"><img class="avator" src="{{ $tweet->sProfileImageUrl }}" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/></div>
@@ -46,7 +45,7 @@
 <img class="avator" src="{{ $tweet->sProfileImageUrl }}'" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/>
 @empty
 <p>ツイートがありません</p>
-@endforelse --}}
+@endforelse
 </ul>
 </div>
 

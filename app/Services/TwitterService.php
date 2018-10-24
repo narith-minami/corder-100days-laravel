@@ -21,11 +21,11 @@ class TwitterService
       env('TWITTER_CONSUMER_SECRET'),
       $access_token,
       $access_token_secret);
-    \Debugbar::info($twitter);
+
     $oObj = $twitter->get("search/tweets", ["q" =>  "test","lang" => "ja","result_type"=>"resent","count"=>"100"]);
     \Debugbar::info($oObj);
-    return $oObj;
-    // return $this->convertViewData($oObj);
+
+    return $this->convertViewData($oObj);
   }
 
  private function convertViewData($twitterResult) {
@@ -98,7 +98,7 @@ class TwitterService
         'oauth_verifier' => $request->oauth_verifier,
         'oauth_token' => $request->oauth_token,
     ));
-    \Debugbar::info($token);
+
     session(array(
       'oauth_token'=>$token['oauth_token'],
       'oauth_token_secret'=>$token['oauth_token_secret']
