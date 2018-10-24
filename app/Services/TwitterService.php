@@ -55,13 +55,13 @@ class TwitterService
          $favClass .= ' favorited';
        }
 
-       $tweets[] = ['iTweetId'=>$iTweetId,'sIdStr'=>$sIdStr,'sText'=>$sText,'sName'=>$sName,'sScreenName'=>$sScreenName,
+       $tweets[] = (object)['iTweetId'=>$iTweetId,'sIdStr'=>$sIdStr,'sText'=>$sText,'sName'=>$sName,'sScreenName'=>$sScreenName,
        'sProfileImageUrl'=>$sProfileImageUrl,'sCreatedAt'=>$sCreatedAt,'sCreatedYMD'=>$sCreatedYMD,'sCreatedHI'=>$sCreatedHI,
        'tweetLink'=>$tweetLink,'tweetURL'=>$tweetURL,'isFavorited'=>$isFavorited,'heartIcon'=>$heartIcon,'favClass'=>$favClass
        ];
      }
 
-     return $tweets->toArray();
+     return $tweets;
  }
 
   /**
