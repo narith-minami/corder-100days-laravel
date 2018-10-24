@@ -1,8 +1,10 @@
 <?php
 
+require_once("twitteroauth/twitteroauth.php");
+
 namespace App\Services;
 
-use Abraham\TwitterOAuth\TwitterOAuth;
+// use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 
 class TwitterService
