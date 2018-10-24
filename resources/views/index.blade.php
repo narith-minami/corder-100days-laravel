@@ -10,6 +10,10 @@
 @endsection
 
 @section('content')
+
+@foreach ($data as $item)
+<p>{{ $item->name }}</p>
+@endforeach
 <div id="home-header"><span>Coder 100Days</span></div>
 <div id="home-main">
   <span class="sub-title">本サービスはTwitterを利用した #100DaysOfCode を発信する人のTweetViewerです。</span>
