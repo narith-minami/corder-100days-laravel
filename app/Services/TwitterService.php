@@ -5,6 +5,8 @@ namespace App\Services;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 
+date_default_timezone_set('Asia/Tokyo');
+
 class TwitterService
 {
 
