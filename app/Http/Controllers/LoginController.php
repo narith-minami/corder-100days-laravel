@@ -6,10 +6,10 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
-{
+{ 
     public function twitter() {
-       $twitterAuth = new TwitterOAuth(env("TWITTER_CONSUMER_KEY"), env("TWITTER_CONSUMER_SECRET"));
-       $request_token = $twitterAuth->oauth('oauth/request_token', array('o_auth'=>env("TWITTER_OAUTH_CALLBACK")));
+       $twitter = new TwitterOAuth(env("TWITTER_CONSUMER_KEY"), env("TWITTER_CONSUMER_SECRET"));
+       $request_token = $twitterAuth->oauth('oauth/request_token', array('oauth_callback'=>env("TWITTER_OAUTH_CALLBACK")));
 
        session(array(
          'requestToken'=>$request_token['oauth_token'],
