@@ -18,13 +18,13 @@ class TwitterService
       return redirect('/login');
     }
 
-    $twitter = new TwitterOAuthOld(
+    $twitter = new TwitterOAuth(
       config('TWITTER_CONSUMER_KEY'),
       config('TWITTER_CONSUMER_SECRET'),
       $access_token,
       $access_token_secret);
 
-    $oObj = $twitter->get("search/tweets", ["q" => $search_word,"lang" => $lang,"result_type"=>"resent","count"=>"100"]);
+    $oObj = $twitter->get("search/tweets", ["q" =>  "test","lang" => "ja","result_type"=>"resent","count"=>"100"]);
     \Debugbar::info($oObj);
     return $oObj;
     // return $this->convertViewData($oObj);
