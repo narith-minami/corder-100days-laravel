@@ -23,9 +23,9 @@ class LoginController extends Controller
        return redirect($url);
     }
 
-    public function twitterCallback() {
-      $oauth_token = session['requestToken'];
-      $oauth_token_secret = session['requestTokenSecret'];
+    public function twitterCallback(Request $request) {
+      $oauth_token = session('requestToken');
+      $oauth_token_secret = session('requestTokenSecret');
 
       # request_tokenが不正な値だった場合エラー
       if ($request->has('oauth_token') && $oauth_token !== $request->oauth_token) {
