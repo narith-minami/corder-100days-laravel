@@ -15,7 +15,6 @@ class ListController extends Controller
 
   public function show(Request $request) {
     $tweets = $this->twitterService->getTimeline("#100DaysOfCode exclude:retweets", "ja");
-    \Debugbar::info($tweets);
     return view('list', ['tweets'=>$tweets]);
   }
 }
