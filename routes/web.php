@@ -13,3 +13,4 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/login', 'LoginController@twitter');
+Route::get('/login/twitter/callback', 'LoginController@twitterCallback');
