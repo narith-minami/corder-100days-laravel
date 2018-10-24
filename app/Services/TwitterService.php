@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use Abraham\TwitterOAuth\TwitterOAuth;
-use Illuminate\Http\Request;
-
-require_once("twitteroauth/twitteroauth.php");
+use Abraham\TwitterOAuth\TwitterOAuth; 
 
 class TwitterService
 {
@@ -86,7 +83,7 @@ class TwitterService
      return $url;
   }
 
-  public function verify(Request $request) {
+  public function verify() {
     $oauth_token = session('requestToken');
     $oauth_token_secret = session('requestTokenSecret');
 
