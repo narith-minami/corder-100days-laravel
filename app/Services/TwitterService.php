@@ -24,7 +24,8 @@ class TwitterService
 
     $oObj = $twitter->get("search/tweets", ["q" => $search_word,"lang" => $lang,"result_type"=>"resent","count"=>"100"]);
     \Debugbar::info($oObj);
-    return $this->convertViewData($oObj);
+    return $oObj;
+    // return $this->convertViewData($oObj);
   }
 
  private function convertViewData($twitterResult) {
