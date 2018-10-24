@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services;
+use App\Services\TwitterService as TwitterService;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
