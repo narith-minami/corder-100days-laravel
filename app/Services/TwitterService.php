@@ -98,17 +98,9 @@ class TwitterService
     ));
 
     session(array(
-      'requestToken'=>$request_token['oauth_token'],
-      'requestTokenSecret'=>$request_token['oauth_token_secret']
+      'requestToken'=>$token['oauth_token'],
+      'requestTokenSecret'=>$token['oauth_token_secret']
     ));
-
-    # access_tokenを用いればユーザー情報へアクセスできるため、それを用いてTwitterOAuthをinstance化
-    $twitter_user = new TwitterOAuth(
-        config('TWITTER_CONSUMER_KEY'),
-        config('TWITTER_CONSUMER_SECRET'),
-        $token['oauth_token'],
-        $token['oauth_token_secret']
-    );
 
     return true;
   }
