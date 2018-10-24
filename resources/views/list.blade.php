@@ -32,9 +32,9 @@
 <ul class="cbp_tmtimeline">
 @forelse ($tweets as $tweet)
 <li>
-  <time class="cbp_tmtime" datetime="{{ $tweet->sCreatedAt }}"><span>{{ $tweet->sCreatedYMD }}</span> <span>{{ $tweet->sCreatedHI }}'</span></time>
+  <time class="cbp_tmtime" datetime="{{ $tweet->sCreatedAt }}"><span>{{ $tweet->sCreatedYMD }}</span> <span>{{ $tweet->sCreatedHI }}</span></time>
   <div class="cbp_tmicon"><img class="avator" src="{{ $tweet->sProfileImageUrl }}" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/></div>
-  <div class="cbp_tmlabel" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}'">
+  <div class="cbp_tmlabel" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">
     <h2 class="user-name" data-username="{{ $tweet->sScreenName }}">{{ $tweet->sName }}</h2>
     <p>{{ $tweet->sText }}</p>
     <div><img class="{{ $tweet->favClass }}" data-status="{{ $tweet->isFavorited }}" data-tweet-id="{{ $tweet->sIdStr }}" src="{{ $tweet->heartIcon }}"/>
