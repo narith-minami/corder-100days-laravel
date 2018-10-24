@@ -20,10 +20,7 @@ class LoginController extends Controller
 
     public function twitterCallback(Request $request) {
       if ($this->twitterService->verify($request)) {
-        // return redirect('/list');
-        $tw = $this->twitterService->getTimeline("#100DaysOfCode exclude:retweets", "ja");
-        $tweets = json_encode($tw);
-        return view('list', ['tweets'=>$tweets]);
+        return redirect('/list');
       } else {
         return redirect('/');
       }
