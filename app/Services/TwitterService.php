@@ -7,6 +7,63 @@ use Illuminate\Http\Request;
 
 class TwitterService
 {
+
+  public function getTimeline($search_word, $lang) {
+    $access_token = session('oauth_token');
+    $access_token_secret = session('oauth_token_secret');
+
+    if (!isset($access_token) || !isset($access_token_secret)) {
+      return redirect('/login');
+    }
+
+    $twitter = new TwitterOAuth(
+      config('TWITTER_CONSUMER_KEY'),
+      config('TWITTER_CONSUMER_SECRET'),
+      $access_token,
+      $access_token_secret);
+
+    $oObj = $twitter->get("search/tweets", ["q" => $search_word,"lang" => $lang,"result_type"=>"resent","count"=>"100"]);
+    return $this->convertViewData($oObj);
+  }
+
+ private function convertViewData($twitterResult) {
+   $iCount = $twitterResult->{'search_metadata'}->{'count'};
+   $responseArray = $twitterResult->{'statuses'};
+   $tweets = [];
+   for($iTweet = 0; $iTweet<$iCount; $iTweet++){
+       $iTweetId =                 $responseArray[$iTweet]->{'id'};
+       if ($iTweetId == '') {
+         continue;
+       }
+       $sIdStr =                   (string)$responseArray[$iTweet]->{'id_str'};
+       $sText=                     $responseArray[$iTweet]->{'text'};
+       $sName=                     $responseArray[$iTweet]->{'user'}->{'name'};
+       $sScreenName=               $responseArray[$iTweet]->{'user'}->{'screen_name'};
+       $sProfileImageUrl =         $responseArray[$iTweet]->{'user'}->{'profile_image_url'};
+       $sCreatedAt =               $responseArray[$iTweet]->{'created_at'};
+       $sStrtotime=                strtotime($sCreatedAt);
+       $sCreatedAt =               date('Y-m-d H:i', $sStrtotime);
+       $sCreatedYMD =              date('Y-m-d', $sStrtotime);
+       $sCreatedHI =               date('H:i', $sStrtotime);
+       $tweetLink =                $responseArray[$iTweet]->{'user'}->{'url'};
+       $tweetURL =            'https://twitter.com/'.$sScreenName.'/status/'.$sIdStr;    //$responseArray[$iTweet]->{'entities'}->{'urls'}->{'url'};
+       $isFavorited =  $responseArray[$iTweet]->{'favorited'};
+       $heartIcon = 'https://coder-100days.herokuapp.com/images/heart_off.png';
+       $favClass = 'fav-icon';
+       if ($isFavorited) {
+         $heartIcon = 'https://coder-100days.herokuapp.com/images/heart_on.png';
+         $favClass .= ' favorited';
+       }
+
+       $tweets[] = ['iTweetId'=>$iTweetId,'sIdStr'=>$sIdStr,'sText'=>$sText,'sName'=>$sName,'sScreenName'=>$sScreenName,
+       'sProfileImageUrl'=>$sProfileImageUrl,'sCreatedAt'=>$sCreatedAt,'sCreatedYMD'=>$sCreatedYMD,'sCreatedHI'=>$sCreatedHI,
+       'tweetLink'=>$tweetLink,'tweetURL'=>$tweetURL,'isFavorited'=>$isFavorited,'heartIcon'=>$heartIcon,'favClass'=>$favClass
+       ];
+     }
+
+     return $tweets;
+ }
+
   /**
    * @return $url {String}
    */
@@ -38,6 +95,11 @@ class TwitterService
     $token = $twitter->oauth('oauth/access_token', array(
         'oauth_verifier' => $request->oauth_verifier,
         'oauth_token' => $request->oauth_token,
+    ));
+
+    session(array(
+      'requestToken'=>$request_token['oauth_token'],
+      'requestTokenSecret'=>$request_token['oauth_token_secret']
     ));
 
     # access_tokenを用いればユーザー情報へアクセスできるため、それを用いてTwitterOAuthをinstance化
