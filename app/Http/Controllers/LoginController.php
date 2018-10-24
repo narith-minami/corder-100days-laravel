@@ -22,7 +22,7 @@ class LoginController extends Controller
       if ($this->twitterService->verify($request)) {
         // return redirect('/list');
         $tw = $this->twitterService->getTimeline("#100DaysOfCode exclude:retweets", "ja");
-        $tweets = $tw->toString();
+        $tweets = json_encode($tw);
         return view('list', ['tweets'=>$tweets]);
       } else {
         return redirect('/');
