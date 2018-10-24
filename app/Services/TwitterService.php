@@ -17,8 +17,8 @@ class TwitterService
     }
 
     $twitter = new TwitterOAuth(
-      config('TWITTER_CONSUMER_KEY'),
-      config('TWITTER_CONSUMER_SECRET'),
+      env('TWITTER_CONSUMER_KEY'),
+      env('TWITTER_CONSUMER_SECRET'),
       $access_token,
       $access_token_secret);
     \Debugbar::info($twitter);
@@ -98,7 +98,7 @@ class TwitterService
         'oauth_verifier' => $request->oauth_verifier,
         'oauth_token' => $request->oauth_token,
     ));
-
+    \Debugbar::info($token);
     session(array(
       'oauth_token'=>$token['oauth_token'],
       'oauth_token_secret'=>$token['oauth_token_secret']
