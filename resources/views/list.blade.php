@@ -41,8 +41,6 @@
       <span class="show_on_tweet" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">twitterで見る</span></div>
     </div>
 </li>
-
-<img class="avator" src="{{ $tweet->sProfileImageUrl }}" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/>
 @empty
 <p>ツイートがありません</p>
 @endforelse
