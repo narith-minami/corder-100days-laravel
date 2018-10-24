@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-// use Abraham\TwitterOAuth\TwitterOAuth;
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 
 require_once("twitteroauth/twitteroauth.php");
@@ -18,7 +18,7 @@ class TwitterService
       return redirect('/login');
     }
 
-    $twitter = new TwitterOAuth(
+    $twitter = new TwitterOAuthOld(
       config('TWITTER_CONSUMER_KEY'),
       config('TWITTER_CONSUMER_SECRET'),
       $access_token,
