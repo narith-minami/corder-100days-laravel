@@ -20,7 +20,7 @@ class LoginController extends Controller
                    'oauth_token' => $request_token['oauth_token']
                ));
 
-       return redirect($sUrl);
+       return redirect($url);
     }
 
     public function twitterCallback() {
