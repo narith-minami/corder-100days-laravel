@@ -21,7 +21,7 @@ class TwitterService
       config('TWITTER_CONSUMER_SECRET'),
       $access_token,
       $access_token_secret);
-
+    \Debugbar::info($twitter);
     $oObj = $twitter->get("search/tweets", ["q" =>  "test","lang" => "ja","result_type"=>"resent","count"=>"100"]);
     \Debugbar::info($oObj);
     return $oObj;
@@ -100,8 +100,8 @@ class TwitterService
     ));
 
     session(array(
-      'requestToken'=>$token['oauth_token'],
-      'requestTokenSecret'=>$token['oauth_token_secret']
+      'oauth_token'=>$token['oauth_token'],
+      'oauth_token_secret'=>$token['oauth_token_secret']
     ));
 
     return true;
