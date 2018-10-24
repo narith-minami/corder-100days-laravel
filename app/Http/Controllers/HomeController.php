@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
   public function index() {
     $arr = [];
-    $arr[] = ['name'=>'aaaa','id'=>'1000'];
+    $arr[] = (object)['name'=>'aaaa','id'=>'1000'];
     return view('index', ['data'=>$arr]);
   }
 }
