@@ -42,14 +42,20 @@
     </div>
 </li>
 
-<img class="avator" src="{{ $tweet->sProfileImageUrl }}'" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/>
+<img class="avator" src="{{ $tweet->sProfileImageUrl }}" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/>
 @empty
 <p>ツイートがありません</p>
 @endforelse
 </ul>
 </div>
 
-<!-- <div id="user-list"><div id="user-list-inner">'$tweet->userIcons.'</div></div> -->
+<div id="user-list">
+  <div id="user-list-inner">
+@foreach ($tweets as $tweet)
+<img class="avator" src="{{ $tweet->sProfileImageUrl }}" data-display-name="{{ $tweet->sName }}" data-username="{{ $tweet->sScreenName }}"/>
+@endforeach
+  </div>
+</div>
 
 <div style="text-align:center;padding-top:8px;"><button id="show-more-button">もっと見る</button></div>
 
