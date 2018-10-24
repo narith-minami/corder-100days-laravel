@@ -23,7 +23,7 @@ class TwitterService
       // $access_token_secret);
 
     $oObj = $twitter->get("search/tweets", ["q" => $search_word,"lang" => $lang,"result_type"=>"resent","count"=>"100"]);
-    var_dump($oObj);
+    \Debugbar::info($oObj);
     return $this->convertViewData($oObj);
   }
 
@@ -61,7 +61,7 @@ class TwitterService
        'tweetLink'=>$tweetLink,'tweetURL'=>$tweetURL,'isFavorited'=>$isFavorited,'heartIcon'=>$heartIcon,'favClass'=>$favClass
        ];
      }
-     var_dump($tweets);
+     \Debugbar::info($tweets);
      return $tweets;
  }
 
