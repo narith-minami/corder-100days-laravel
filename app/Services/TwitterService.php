@@ -22,7 +22,7 @@ class TwitterService
       $access_token,
       $access_token_secret);
 
-    $oObj = $twitter->get("search/tweets", ["q" =>  "test","lang" => "ja","result_type"=>"resent","count"=>"100"]);
+    $oObj = $twitter->get("search/tweets", ["q"=>$search_word,"lang" =>$lang,"result_type"=>"resent","count"=>"100"]);
     \Debugbar::info($oObj);
 
     return $this->convertViewData($oObj);
@@ -62,7 +62,7 @@ class TwitterService
        'tweetLink'=>$tweetLink,'tweetURL'=>$tweetURL,'isFavorited'=>$isFavorited,'heartIcon'=>$heartIcon,'favClass'=>$favClass
        ];
      }
-     \Debugbar::info($tweets);
+     // \Debugbar::info($tweets);
      return $tweets;
  }
 
