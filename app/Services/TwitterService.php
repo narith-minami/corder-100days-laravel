@@ -28,6 +28,7 @@ class TwitterService
 
  private function convertViewData($twitterResult) {
    $iCount = $twitterResult->{'search_metadata'}->{'count'};
+   dd($iCount);
    $responseArray = $twitterResult->{'statuses'};
    $tweets = [];
    for($iTweet = 0; $iTweet<$iCount; $iTweet++){
