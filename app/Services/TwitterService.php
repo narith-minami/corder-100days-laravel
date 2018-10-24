@@ -61,7 +61,7 @@ class TwitterService
        ];
      }
 
-     return $tweets;
+     return $tweets->toArray();
  }
 
   /**
