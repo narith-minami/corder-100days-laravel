@@ -15,3 +15,4 @@ Route::get('/', 'HomeController@index');
 Route::get('/list', 'ListController@show');
 Route::get('/login', 'LoginController@twitter');
 Route::get('/login/twitter/callback', 'LoginController@twitterCallback');
+Route::get('/twitter/get/tweets', 'TwitterApiController@getTimelineElements');
