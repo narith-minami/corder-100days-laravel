@@ -60,7 +60,7 @@ $(function() {
  		 $userView.empty();
 		 $footer.hide();
  		 $.ajax({
-         url : "ajax.php",
+         url : "twitter/get/tweets",
          type : "POST",
          data : {username:username}
      }).done(function(response, textStatus, xhr) {
@@ -128,7 +128,7 @@ $(function() {
 
 	function _showSearchByUserTweets(username, dispName, query) {
 		$.ajax({
-			 url : "/twitter/get/tweets",
+			 url : "twitter/get/tweets",
 			 type : "POST",
 			 data : {username:username,query:query}
 	 }).done(function(response, textStatus, xhr) {
