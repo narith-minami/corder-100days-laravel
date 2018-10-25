@@ -61,7 +61,7 @@ $(function() {
 		 $footer.hide();
  		 $.ajax({
          url : "twitter/get/tweets",
-         type : "POST",
+         type : "GET",
          data : {username:username}
      }).done(function(response, textStatus, xhr) {
  	      $dispName.text(userDispName);
