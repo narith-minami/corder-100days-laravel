@@ -15,10 +15,12 @@ class TwitterApiController extends Controller
 
   public function getTimelineElements(Request $request) {
     $isUserMode = false;
-    if ($_POST['query'] && $_POST['query'] !== '') {
-      $search_param = "#100DaysOfCode ".$_POST['query']." exclude:retweets";
-    } else if ($_POST['username'] && $_POST['username'] !== '') {
-      $search_param = "#100DaysOfCode exclude:retweets from:".$_POST['username'];
+    $data = $request->all();
+    \Debugbar::info($data);
+    if ($data['query'] && $data['query'] !== '') {
+      $search_param = "#100DaysOfCode ".$data['query']." exclude:retweets";
+    } else if ($data['username'] && $data['username'] !== '') {
+      $search_param = "#100DaysOfCode exclude:retweets from:".$data['username'];
       $isUserMode = true;
     }
     $tweetsElements = $this->twitterService->getTimelineHTML($search_param, "ja", $isUserMode);
