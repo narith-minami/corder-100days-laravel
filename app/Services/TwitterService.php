@@ -10,25 +10,81 @@ date_default_timezone_set('Asia/Tokyo');
 class TwitterService
 {
 
-  public function getTimeline($search_word, $lang) {
-    $access_token = session('oauth_token');
-    $access_token_secret = session('oauth_token_secret');
-
-    if (!isset($access_token) || !isset($access_token_secret)) {
-      return redirect('/login');
-    }
-
-    $twitter = new TwitterOAuth(
-      env('TWITTER_CONSUMER_KEY'),
-      env('TWITTER_CONSUMER_SECRET'),
-      $access_token,
-      $access_token_secret);
-
-    $oObj = $twitter->get("search/tweets", ["q"=>$search_word,"lang" =>$lang,"result_type"=>"resent","count"=>"100"]);
-    \Debugbar::info($oObj);
-
-    return $this->convertViewData($oObj);
+  public function getTimelineHTML($search_word, $lang, $isUserMode) {
+    return $this->convertHTML($this->getTweets($search_word, $lang), $isUserMode);
   }
+
+  public function getTimeline($search_word, $lang) {
+    return $this->convertViewData($this->getTweets($search_word, $lang));
+  }
+
+ private function getTweets($search_word, $lang) {
+   $access_token = session('oauth_token');
+   $access_token_secret = session('oauth_token_secret');
+
+   if (!isset($access_token) || !isset($access_token_secret)) {
+     return redirect('/login');
+   }
+
+   $twitter = new TwitterOAuth(
+     env('TWITTER_CONSUMER_KEY'),
+     env('TWITTER_CONSUMER_SECRET'),
+     $access_token,
+     $access_token_secret);
+
+   $oObj = $twitter->get("search/tweets", ["q"=>$search_word,"lang" =>$lang,"result_type"=>"resent","count"=>"100"]);
+   \Debugbar::info($oObj);
+   return $oObj;
+ }
+
+ private function convertHTML($twitterResult) {
+   $iCount = $twitterResult->{'search_metadata'}->{'count'};
+   $responseArray = $twitterResult->{'statuses'};
+   $result = '<ul id="user-timeline" class="cbp_tmtimeline">';
+   for($iTweet = 0; $iTweet<$iCount; $iTweet++){
+
+       $iTweetId =                 $responseArray[$iTweet]->{'id'};
+       if ($iTweetId == '') {
+         continue;
+       }
+       $sIdStr =                   (string)$responseArray[$iTweet]->{'id_str'};
+       $sText=                     $responseArray[$iTweet]->{'text'};
+       $sName=                     $responseArray[$iTweet]->{'user'}->{'name'};
+       $sScreenName=               $responseArray[$iTweet]->{'user'}->{'screen_name'};
+       $sProfileImageUrl =         $responseArray[$iTweet]->{'user'}->{'profile_image_url'};
+       $sCreatedAt =               $responseArray[$iTweet]->{'created_at'};
+       $sStrtotime=                strtotime($sCreatedAt);
+       $sCreatedAt =               date('Y-m-d H:i', $sStrtotime);
+       $sCreatedYMD =              date('Y-m-d', $sStrtotime);
+       $sCreatedHI =               date('H:i', $sStrtotime);
+       $tweetLink =                $responseArray[$iTweet]->{'user'}->{'url'};
+       $tweetURL =            'https://twitter.com/'.$sScreenName.'/status/'.$sIdStr;
+       $isFavorited = (boolean)$responseArray[$iTweet]->{'user'}->{'favorited'};
+       $heartIcon = 'https://coder-100days.herokuapp.com/images/heart_off.png';
+       $favClass = 'fav-icon';
+       if ($isFavorited) {
+         $heartIcon = 'https://coder-100days.herokuapp.com/images/heart_on.png';
+         $favClass .= ' favorited';
+       }
+
+       $row_html = '<li>';
+       $row_html .= '<time class="cbp_tmtime" datetime="'.$sCreatedAt.'"><span>'.$sCreatedYMD.'</span> <span>'.$sCreatedHI.'</span></time>';
+       $row_html .= '<div class="cbp_tmicon"><img class="avator" src="'.$sProfileImageUrl.'"/></div>';
+       $row_html .= '<div class="cbp_tmlabel" data-username="'.$sScreenName.'" data-tweet-url="'.$tweetURL.'">';
+       if (!$isUserMode) {
+         $row_html .= '<h2>'.$sName.'</h2>';
+       }
+       $row_html .= '<p>'.$sText.'</p>';
+       $row_html .= '<div><img class="'.$favClass.'" data-tweet-id="'.$sIdStr.'" src="'.$heartIcon.'">';
+       $row_html .= '<span class="show_on_tweet" data-username="'.$sScreenName.'" data-tweet-url="'.$tweetURL.'">twitterで見る</span></div>';
+       $row_html .= '</div></li>';
+
+       $result .=$row_html;
+   }
+
+   $result .= '</ul>';
+   return $result;
+ }
 
  private function convertViewData($twitterResult) {
    $iCount = $twitterResult->{'search_metadata'}->{'count'};

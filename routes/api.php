@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/twitter/get/tweets', 'TwitterApiController@getTimelineElements');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

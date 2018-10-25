@@ -128,7 +128,7 @@ $(function() {
 
 	function _showSearchByUserTweets(username, dispName, query) {
 		$.ajax({
-			 url : "ajax.php",
+			 url : "/twitter/get/tweets",
 			 type : "POST",
 			 data : {username:username,query:query}
 	 }).done(function(response, textStatus, xhr) {
