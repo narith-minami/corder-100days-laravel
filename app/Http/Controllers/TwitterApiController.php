@@ -13,17 +13,33 @@ class TwitterApiController extends Controller
       $this->twitterService = $twitterService;
   }
 
-  public function getTimelineElements(Request $request) {
-    $isUserMode = false;
+  /**
+   * @return {string} html
+   */
+  public function searchTimeline(Request $request) {
     $data = $request->all();
     \Debugbar::info($data);
-    if ($data['query'] && $data['query'] !== '') {
-      $search_param = "#100DaysOfCode ".$data['query']." exclude:retweets";
-    } else if ($data['username'] && $data['username'] !== '') {
-      $search_param = "#100DaysOfCode exclude:retweets from:".$data['username'];
-      $isUserMode = true;
+    $query = $data['query'];
+    if (empty($query)) {
+       return null;
     }
-    $tweetsElements = $this->twitterService->getTimelineHTML($search_param, "ja", $isUserMode);
+    $search_param = "#100DaysOfCode ".$query." exclude:retweets";
+    $tweetsElements = $this->twitterService->getTimelineHTML($search_param, "ja", false);
+    return $tweetsElements;
+  }
+
+  /**
+   * @return {string} html
+   */
+  public function getTimelineElements(Request $request) {
+    $data = $request->all();
+    \Debugbar::info($data);
+    $username = $data['username'];
+    if (empty($username)) {
+      return null;
+    }
+    $search_param = "#100DaysOfCode exclude:retweets from:".$username;
+    $tweetsElements = $this->twitterService->getTimelineHTML($search_param, "ja", true);
     return $tweetsElements;
   }
 }
