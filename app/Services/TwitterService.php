@@ -37,7 +37,7 @@ class TwitterService
    return $oObj;
  }
 
- private function convertHTML($twitterResult) {
+ private function convertHTML($twitterResult ,$isUserMode) {
    $iCount = $twitterResult->{'search_metadata'}->{'count'};
    $responseArray = $twitterResult->{'statuses'};
    $result = '<ul id="user-timeline" class="cbp_tmtimeline">';
