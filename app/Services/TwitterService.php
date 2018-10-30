@@ -38,11 +38,11 @@ class TwitterService
  }
 
  private function convertHTML($twitterResult ,$isUserMode) {
-   $iCount = $twitterResult->{'search_metadata'}->{'count'};
    $responseArray = $twitterResult->{'statuses'};
+   $iCount = count($responseArray);
    \Debugbar::info($responseArray);
    $result = '<ul id="user-timeline" class="cbp_tmtimeline">';
-   for($iTweet = 0; $iTweet<$iCount-1; $iTweet++){
+   for($iTweet = 0; $iTweet<$iCount; $iTweet++){
 
        $iTweetId =                 $responseArray[$iTweet]->{'id'};
        if ($iTweetId == '') {
