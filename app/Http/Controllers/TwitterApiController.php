@@ -14,6 +14,22 @@ class TwitterApiController extends Controller
   }
 
   /**
+   * [POST]
+   */
+  public function favorite(Request $request) {
+    $data = $request->all();
+    \Debugbar::info($data);
+    $tweet_id = $data['targetId'];
+    $doCreate = $data['doCreate'];
+    if (empty($tweet_id)) {
+       return false;
+    }
+    $this->twitterService->postFavorite($tweet_id, $doCreate);
+    return true;
+  }
+
+  /**
+   * [GET]
    * @return {string} html
    */
   public function searchTimeline(Request $request) {
@@ -29,6 +45,7 @@ class TwitterApiController extends Controller
   }
 
   /**
+   * [GET]
    * @return {string} html
    */
   public function getTimelineElements(Request $request) {

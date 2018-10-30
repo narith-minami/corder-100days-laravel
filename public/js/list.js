@@ -116,7 +116,7 @@ $(function() {
 
 	function _postFavoritesAction(targetId, doCreate) {
 		$.ajax({
-			 url : "api_favorite.php",
+			 url : "twitter/favorite",
 			 type : "POST",
 			 data : {targetId:targetId,doCreate:doCreate}
 	 }).done(function(response, textStatus, xhr) {

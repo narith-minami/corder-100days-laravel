@@ -10,6 +10,15 @@ date_default_timezone_set('Asia/Tokyo');
 class TwitterService
 {
 
+  public function postFavorite($tweet_id, $is_create) {
+    $twitter = $this->getTwitterInstance();
+    if ($is_create) {
+      $oObj = $twitter->post("favorites/create", ["id" => $tweet_id]);
+    } else {
+      $oObj = $twitter->post("favorites/destroy", ["id" => $tweet_id]);
+    }
+  }
+
   public function getTimelineHTML($search_word, $lang, $isUserMode) {
     return $this->convertHTML($this->getTweets($search_word, $lang), $isUserMode);
   }
@@ -18,7 +27,7 @@ class TwitterService
     return $this->convertViewData($this->getTweets($search_word, $lang));
   }
 
- private function getTweets($search_word, $lang) {
+ private function getTwitterInstance() {
    $access_token = session('oauth_token');
    $access_token_secret = session('oauth_token_secret');
 
@@ -31,9 +40,13 @@ class TwitterService
      env('TWITTER_CONSUMER_SECRET'),
      $access_token,
      $access_token_secret);
+     return $twitter;
+ }
 
+ private function getTweets($search_word, $lang) {
+   $twitter = $this->getTwitterInstance();
    $oObj = $twitter->get("search/tweets", ["q"=>$search_word,"lang" =>$lang,"result_type"=>"resent","count"=>"100"]);
-   \Debugbar::info($oObj);
+   // \Debugbar::info($oObj);
    return $oObj;
  }
 
