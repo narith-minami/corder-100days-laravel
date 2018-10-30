@@ -38,10 +38,8 @@
   <div class="cbp_tmlabel" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">
     <h2 class="user-name" data-username="{{ $tweet->sScreenName }}">{{ $tweet->sName }}</h2>
     <p>{{ $tweet->sText }}</p>
-    </div>
-      <img class="{{ $tweet->favClass }}" data-status="{{ $tweet->isFavorited }}" data-tweet-id="{{ $tweet->sIdStr }}" src="{{ $tweet->heartIcon }}"/>
-      <span class="show_on_tweet" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">twitterで見る</span>
-    </div>
+    <img class="{{ $tweet->favClass }}" data-status="{{ $tweet->isFavorited }}" data-tweet-id="{{ $tweet->sIdStr }}" src="{{ $tweet->heartIcon }}"/>
+    <span class="show_on_tweet" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">twitterで見る</span>
   </div>
 </li>
 @empty
