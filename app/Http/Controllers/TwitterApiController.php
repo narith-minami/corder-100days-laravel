@@ -16,11 +16,11 @@ class TwitterApiController extends Controller
   /**
    * [POST]
    */
-  public function favorite(Request $request) {
-    $data = $request->all();
-    \Debugbar::info($data);
-    $tweet_id = $data['targetId'];
-    $doCreate = $data['doCreate'];
+  public function favorite($tweet_id, $doCreate) {
+    // $data = $request->all();
+    // \Debugbar::info($data);
+    // $tweet_id = $data['targetId'];
+    // $doCreate = $data['doCreate'];
     if (empty($tweet_id)) {
        return false;
     }

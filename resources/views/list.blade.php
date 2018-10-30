@@ -37,7 +37,11 @@
   <div class="cbp_tmlabel" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">
     <h2 class="user-name" data-username="{{ $tweet->sScreenName }}">{{ $tweet->sName }}</h2>
     <p>{{ $tweet->sText }}</p>
-    <div><img class="{{ $tweet->favClass }}" data-status="{{ $tweet->isFavorited }}" data-tweet-id="{{ $tweet->sIdStr }}" src="{{ $tweet->heartIcon }}"/>
+    <form method="POST" action=" {{ action('TwitterApiController@favorite', ['tweet_id'=>$tweet->sIdStr, 'doCreate'=>$tweet->isFavorited ]) }}">
+    {{ csrf_field() }}
+        <img class="{{ $tweet->favClass }}" data-status="{{ $tweet->isFavorited }}" data-tweet-id="{{ $tweet->sIdStr }}" src="{{ $tweet->heartIcon }}"/>
+    </form>
+
       <span class="show_on_tweet" data-username="{{ $tweet->sScreenName }}" data-tweet-url="{{ $tweet->tweetURL }}">twitterで見る</span></div>
     </div>
 </li>
