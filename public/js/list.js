@@ -10,6 +10,12 @@ $(function() {
 	$searchQuery = $("#search-query");
   var searchedUsername = '';
 
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
 	$('.fav-icon').click(function(event) {
       _favoreteClickAction($(this));
 	});
