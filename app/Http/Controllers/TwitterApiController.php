@@ -25,7 +25,7 @@ class TwitterApiController extends Controller
        return false;
     }
     $this->twitterService->postFavorite($tweet_id, $doCreate);
-    return true;
+    return redirect('/list');
   }
 
   /**
