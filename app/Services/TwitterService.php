@@ -42,7 +42,7 @@ class TwitterService
    $responseArray = $twitterResult->{'statuses'};
    \Debugbar::info($responseArray);
    $result = '<ul id="user-timeline" class="cbp_tmtimeline">';
-   for($iTweet = 0; $iTweet<$iCount; $iTweet++){
+   for($iTweet = 0; $iTweet<$iCount-1; $iTweet++){
 
        $iTweetId =                 $responseArray[$iTweet]->{'id'};
        if ($iTweetId == '') {
