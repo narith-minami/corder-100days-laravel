@@ -19,4 +19,4 @@ Route::get('/test', function(){
 });
 Route::get('/login/twitter/callback', 'LoginController@twitterCallback');
 Route::get('/twitter/get/tweets', 'TwitterApiController@getTimelineElements');
-Route::get('/twitter/search/tweets', 'TwitterApiController@searchTweets');
+Route::get('/twitter/search/tweets', 'TwitterApiController@searchTimeline');
