@@ -59,7 +59,7 @@ class TwitterService
        $sCreatedHI =               date('H:i', $sStrtotime);
        $tweetLink =                $responseArray[$iTweet]->{'user'}->{'url'};
        $tweetURL =            'https://twitter.com/'.$sScreenName.'/status/'.$sIdStr;
-       $isFavorited = (boolean)$responseArray[$iTweet]->{'user'}->{'favorited'};
+       $isFavorited = (boolean)$responseArray[$iTweet]->{'favorited'};
        $heartIcon = 'https://coder-100days.herokuapp.com/images/heart_off.png';
        $favClass = 'fav-icon';
        if ($isFavorited) {
