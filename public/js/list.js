@@ -37,7 +37,7 @@ $(function() {
 	$("#search-submit").click(function(e){
 		$userView.empty();
 		var query = $("#search-query").val();
-		_showSearchByUserTweets('', '検索ワード：'+query, query);
+		_showSearchByUserTweets('twitter/search/tweets', {query:query}, '検索ワード：'+query);
 	});
 
 	$searchQuery.keypress(function(e){
@@ -96,7 +96,7 @@ $(function() {
 
 		 $userView.empty();
 		 $footer.hide();
-		 _showSearchByUserTweets(username, userDispName, '');
+		 _showSearchByUserTweets('twitter/get/tweets', {username:userDispName} ,userDispName);
 	});
 
 	$showMore.click(function(event) {
@@ -126,11 +126,11 @@ $(function() {
 	 });
   }
 
-	function _showSearchByUserTweets(username, dispName, query) {
+  function _showSearchByUserTweets(url, data, dispName) {
 		$.ajax({
-			 url : "twitter/get/tweets",
-			 type : "POST",
-			 data : {username:username,query:query}
+			 url : url,
+			 type : "GET",
+			 data : data
 	 }).done(function(response, textStatus, xhr) {
 			 $dispName.text(dispName);
 			 $dispName.show();
